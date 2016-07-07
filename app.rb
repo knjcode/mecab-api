@@ -68,6 +68,7 @@ post '/mecab', provides: :json do
       pos = splitted[0]
       basic_form = splitted[6]
       pronunciation = splitted[8]
+      pronunciation = pronunciation.tr('ァ-ン','ぁ-ん') if pronunciation
       pos_detail_1 = splitted[1]
       word_array.push ({pos: pos, basic_form: basic_form, pronunciation: pronunciation, surface_form: surface_form, pos_detail_1: pos_detail_1})
     end
