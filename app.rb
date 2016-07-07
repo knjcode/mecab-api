@@ -56,9 +56,26 @@ post '/mecab', provides: :json do
     end
 
     word_list, dic = parse(sentence, dic)
-    word_list = word_list.each_line.map(&:chomp)
 
-    data = { request_id: request_id, word_list: word_list, dictionary: dic, normalized: normalized }
+    # $stdout.sync = true
+
+    word_array = []
+    word_list.each_line do |line|
+      line = line.chomp
+      break if line == 'EOS'
+      surface_form = line.split(/\t/).first
+      splitted = line.split(/\t/)[1].split(',')
+      pos = splitted[0]
+      basic_form = splitted[6]
+      pronunciation = splitted[8]
+      pos_detail_1 = splitted[1]
+      word_array.push ({pos: pos, basic_form: basic_form, pronunciation: pronunciation, surface_form: surface_form, pos_detail_1: pos_detail_1})
+    end
+
+    # word_list = word_list.each_line.map(&:chomp)
+
+    # data = { request_id: request_id, word_list: word_list, dictionary: dic, normalized: normalized }
+    data = { request_id: request_id, word_list: word_array, dictionary: dic, normalized: normalized }
     json data
   end
 end
