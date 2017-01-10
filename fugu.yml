@@ -1,0 +1,8 @@
+image:   knjcode/mecab-api-neologd:0.0.1
+name:    mecab-api-neologd
+detach:  true
+restart: always
+volume:
+  - $PWD:/root/sinatra
+publish:
+  - 6000:9999

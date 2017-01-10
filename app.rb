@@ -55,22 +55,29 @@ post '/mecab', provides: :json do
       dic = body["dictionary"]
     end
 
-    word_list, dic = parse(sentence, dic)
+    $stdout.sync = true
 
-    # $stdout.sync = true
+    sentence.gsub!('サンチーム','サンチーム ')
+    sentence.gsub!('センチメートル','センチメートル ')
+    sentence.gsub!('キログラム','キログラム ')
+
+    word_list, dic = parse(sentence, dic)
 
     word_array = []
     word_list.each_line do |line|
       line = line.chomp
       break if line == 'EOS'
-      surface_form = line.split(/\t/).first
+      surface_form = line.split(" ").first
       splitted = line.split(/\t/)[1].split(',')
       pos = splitted[0]
       basic_form = splitted[6]
       pronunciation = splitted[8]
+      pronunciation = 'ふうりゅー' if pronunciation == 'フリュー'
       pronunciation = pronunciation.tr('ァ-ン','ぁ-ん') if pronunciation
+
       pos_detail_1 = splitted[1]
-      word_array.push ({pos: pos, basic_form: basic_form, pronunciation: pronunciation, surface_form: surface_form, pos_detail_1: pos_detail_1})
+      hoge = {pos: pos, basic_form: basic_form, pronunciation: pronunciation, surface_form: surface_form, pos_detail_1: pos_detail_1}
+      word_array.push(hoge)
     end
 
     # word_list = word_list.each_line.map(&:chomp)
