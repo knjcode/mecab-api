@@ -1,4 +1,4 @@
-FROM ruby:2.4.0
+FROM ruby:2.4.1
 
 MAINTAINER knjcode
 
@@ -9,7 +9,7 @@ RUN apt-get update \
 
 RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git /root/mecab-ipadic-neologd \
     && cd /root/mecab-ipadic-neologd \
-    && ./bin/install-mecab-ipadic-neologd -n -y --forceyes \
+    && ./bin/install-mecab-ipadic-neologd -n -a -y --forceyes \
     && cd /root \
     && rm -rf mecab-ipadic-neologd
 
