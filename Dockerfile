@@ -1,4 +1,4 @@
-FROM ruby:2.4.2
+FROM ruby:2.5.0
 
 MAINTAINER knjcode
 
@@ -9,7 +9,7 @@ RUN apt-get update \
 
 RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git /root/mecab-ipadic-neologd \
     && cd /root/mecab-ipadic-neologd \
-    && ./bin/install-mecab-ipadic-neologd -n -a -y --forceyes \
+    && ./bin/install-mecab-ipadic-neologd -n -a -y \
     && cd /root \
     && rm -rf mecab-ipadic-neologd
 
@@ -23,6 +23,7 @@ RUN bundle install && gem install foreman
 
 EXPOSE 9999
 ENV PORT 9999
-ENV MECAB_IPADIC_NEOLOGD_DICDIR /usr/lib/mecab/dic/mecab-ipadic-neologd
+# ENV MECAB_IPADIC_NEOLOGD_DICDIR /usr/lib/mecab/dic/mecab-ipadic-neologd
+ENV MECAB_API_DICDIR /usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd
 
 CMD ["foreman","start","-d","/root/sinatra"]
