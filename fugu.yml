@@ -1,4 +1,4 @@
-image:   knjcode/mecab-api-neologd:0.0.7
+image:   knjcode/mecab-api-neologd:0.0.8
 name:    mecab-api-neologd
 detach:  true
 restart: always
