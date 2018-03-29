@@ -1,0 +1,7 @@
+mecab-api-neologd:
+  build: .
+  volumes:
+    - $PWD:/root/sinatra
+  ports:
+    - "6000:9999"
+  restart: always
