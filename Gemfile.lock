@@ -1,14 +1,14 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    backports (3.11.1)
+    backports (3.11.3)
     ffi (1.9.23)
     moji (1.6)
     multi_json (1.13.1)
     mustermann (1.0.2)
     natto (1.1.1)
       ffi (>= 1.9.0)
-    rack (2.0.4)
+    rack (2.0.5)
     rack-protection (2.0.1)
       rack
     sinatra (2.0.1)
